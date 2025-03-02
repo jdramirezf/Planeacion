@@ -6,6 +6,71 @@
     <title>Planeacion</title>
 </head>
 <body>
-    
+    <div>
+        <h1>
+            Planeación - Alcaldia Local de Engativa
+        </h1>
+    <h2>
+        Seleccione el objetico
+    </h2>
+    </div>
+    <div>
+        <input type="text" id="search" placeholder="Buscar...">
+        <label id="resultCount"></label>
+        <script>
+            document.getElementById('search').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const options = document.querySelectorAll('#subobjetivos option');
+            let count = 0;
+            options.forEach(option => {
+                if (option.textContent.toLowerCase().includes(searchTerm)) {
+                option.style.display = '';
+                count++;
+                } else {
+                option.style.display = 'none';
+                }
+            });
+            document.getElementById('resultCount').textContent = `Resultados: ${count}`;
+            });
+        </script>
+    </div>
+    <div>
+    <select>
+        <option value="opcion1">Objetivo 1. Bogotá avanza en seguridad</option>
+        <option value="opcion2">Objetivo 2. Bogotá Confía en su Bien - Estar</option>
+        <option value="opcion3">Objetivo 3. Bogotá Confía en su Potencial</option>
+        <option value="opcion4">Objetivo 4. Bogotá Ordena su Territorio y Avanza en su Acción Climática</option>
+        <option value="opcion5">Objetivo 5. Bogotá Confía en su Gobierno</option>
+    </select>
+    </div>
+    <div>
+        <select id="subobjetivos"></select>
+            <option value="">Seleccione un programa</option>
+        </select>
+
+        <script>
+            const subobjetivos = {
+                opcion1: ["Programa 1. Diálogo social y cultura ciudadana para la convivencia pacífica y la recuperación de la confianza", "Programa 2. Cero tolerancia a las violencias contra las mujeres y basadas en género", "Programa 3. Desmantelamiento de estructuras criminales y delincuenciales con mejores capacidades y activos tecnológicos", "Programa 4. Servicios centrados en la justicia.", "Programa 5. Espacio público seguro e inclusivo."],
+                opcion2: ["Programa 10. Salud Pública Integrada e Integral", "Programa 12. Bogotá cuida a su gente", "Programa 13. Bogotá, un territorio de paz y reconciliación en donde todos puedan volver a empezar.", "Programa 14. Bogotá deportiva, recreativa, artística, patrimonial e intercultural.", "Programa 15. Bogotá protege todas las formas de vida", "Programa 7. Bogotá, una ciudad con menos pobreza.", "Programa 8. Erradicación del hambre en Bogotá"],
+                opcion3: ["Programa 16. Atención integral a la primera infancia y educación como eje del potencial humano.", "Programa 19. Desarrollo empresarial, productividad y empleo.", "Programa 20. Promoción del emprendimiento formal, equitativo e incluyente"],
+                opcion4: ["Programa 24. Revitalización y renovación urbana y rural con inclusión.", "Programa 25. Aumento de la resiliencia al cambio climático y reduccion de la vulnerabilidad", "Programa 26. Movilidad Sostenible.", "Programa 27. Gestión del riesgo de desastres para un territorio seguro", "Programa 30. Atención del déficit social para un hábitat digno."],
+                opcion5: ["Programa 33. Fortalecimiento institucional para un Gobierno confiable", "Programa 35. Bogotá Ciudad Inteligente", "Programa 39. Camino hacia una democracia deliberativa con un gobierno cercano a la gente y con participación ciudadana"]
+            };
+
+            document.querySelector('select').addEventListener('change', function() {
+                const subobjetivoSelect = document.getElementById('subobjetivos');
+                subobjetivoSelect.innerHTML = '<option value="">Seleccione un programa</option>';
+                const selectedOption = this.value;
+                if (subobjetivos[selectedOption]) {
+                    subobjetivos[selectedOption].forEach(function(subobjetivo) {
+                        const option = document.createElement('option');
+                        option.value = subobjetivo;
+                        option.textContent = subobjetivo;
+                        subobjetivoSelect.appendChild(option);
+                    });
+                }
+            });
+        </script>
+    </div>
 </body>
 </html>
